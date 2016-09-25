@@ -1,11 +1,11 @@
 from discorrecd.discorrecd import Discorrecd
-from discorrecd.modules.testmodule import TestModule
+from discorrecd.modules.customemoticonsmodule import CustomEmoticonsModule
 
 
 def main():
     discorrecd = Discorrecd()
     discorrecd.initialize()
-    discorrecd.core.add(TestModule)
+    discorrecd.core.add(CustomEmoticonsModule)
     discorrecd.start()
 
 
