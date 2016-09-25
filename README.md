@@ -1,0 +1,2 @@
+# Discorrecd
+Discord client extension
