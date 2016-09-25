@@ -33,7 +33,7 @@ class Core(object):
             raise ValueError('Did not receive valid credentials to log into Discord')
 
     def add(self, module: Type[Module], *args, **kwargs) -> Module:
-        """
+        """Add a module to the core
 
         :param module: The module that should be added
         :param args: The arguments that will be passed on to the module constructor
