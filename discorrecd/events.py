@@ -285,7 +285,6 @@ class EventMethod(object):
         """
         for name in dir(holder):
             obj = getattr(holder, name)
-            log.debug(' | '.join(str(o) for o in [name, obj]))
             if isinstance(obj, cls):
                 obj.register(manager, holder)
 
