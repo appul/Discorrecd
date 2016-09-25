@@ -1,4 +1,5 @@
 import logging
+from typing import Any
 
 import discord
 
@@ -18,7 +19,7 @@ class Module(object):
         self.client = client  # type: discord.Client
 
     @staticmethod
-    def event(*args, **kwargs) -> EventHandlerMethod:
+    def event(*args: Any, **kwargs: Any) -> 'EventHandlerMethod':
         """Register a method as handler for events.
 
         :param args: The positional arguments passed to :class:`EventHandlerMethod`
@@ -27,7 +28,7 @@ class Module(object):
         return EventHandlerMethod(*args, **kwargs)
 
     @staticmethod
-    def command(*args, **kwargs) -> CommandHandlerMethod:
+    def command(*args: Any, **kwargs: Any) -> 'CommandHandlerMethod':
         """Register a method as handler for commands.
 
         :param args: The positional arguments passed to :class:`CommandHandlerMethod`
