@@ -22,7 +22,7 @@ class CustomEmoticonsModule(Module):
     deleted and replaced with a new message that includes the emoticon image.
     """
 
-    @Module.Event(['message'])
+    @Module.event(['message'])
     async def on_message(self, message: discord.Message):
         """Event handler for new messages"""
         if message.author.id == self.client.connection.user.id:

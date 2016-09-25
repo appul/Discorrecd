@@ -230,7 +230,7 @@ class EventMethod(object):
         Implementations can use this indication to assign the handler to the correct
         :class:`EventManager`.
     """
-    category = 'events'
+    category = 'none'
 
     def __init__(self, events: List[str], call_limit: int = None, bind=True):
         """

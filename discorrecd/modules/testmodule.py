@@ -8,7 +8,7 @@ log = logging.getLogger(__name__)
 
 
 class TestModule(Module):
-    @Module.Event(['message'])
+    @Module.event(['message'])
     async def on_message(self, message: discord.Message):
         if message.author.id == self.client.connection.user.id:
             msg = ('Me @', message.channel.name, ':', message.content)

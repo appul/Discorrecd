@@ -17,5 +17,28 @@ class Module(object):
         """
         self.client = client  # type: discord.Client
 
-    class Event(EventMethod):
-        pass
+    @staticmethod
+    def event(*args, **kwargs) -> EventHandlerMethod:
+        """Register a method as handler for events.
+
+        :param args: The positional arguments passed to :class:`EventHandlerMethod`
+        :param kwargs: The keyword arguments passed to :class:`EventHandlerMethod`
+        """
+        return EventHandlerMethod(*args, **kwargs)
+
+    @staticmethod
+    def command(*args, **kwargs) -> CommandHandlerMethod:
+        """Register a method as handler for commands.
+
+        :param args: The positional arguments passed to :class:`CommandHandlerMethod`
+        :param kwargs: The keyword arguments passed to :class:`CommandHandlerMethod`
+        """
+        return CommandHandlerMethod(*args, **kwargs)
+
+
+class EventHandlerMethod(EventMethod):
+    category = 'events'
+
+
+class CommandHandlerMethod(EventMethod):
+    category = 'commands'

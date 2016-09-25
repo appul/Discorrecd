@@ -3,7 +3,7 @@ from typing import List, Type
 
 from discorrecd.coreclient import CoreClient
 from discorrecd.events import EventManager
-from discorrecd.module import Module
+from discorrecd.module import Module, EventHandlerMethod, CommandHandlerMethod
 
 log = logging.getLogger(__name__)
 
@@ -13,6 +13,7 @@ class Core(object):
 
     def __init__(self):
         self.events = EventManager()  # type: EventManager
+        self.commands = EventManager()  # type: EventManager
         self.client = CoreClient(self.events)  # type: CoreClient
         self._modules = []  # type: List[Module]
 
@@ -45,6 +46,7 @@ class Core(object):
         log.info('Adding module to Discorrecd core: {0}'.format(module.__name__))
 
         instance = module(*args, **kwargs, client=self.client)
-        Module.Event.register_methods(self.events, instance)
+        EventHandlerMethod.register_methods(self.events, instance)
+        CommandHandlerMethod.register_methods(self.commands, instance)
         self._modules.append(instance)
         return instance
