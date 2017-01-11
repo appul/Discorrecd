@@ -9,7 +9,7 @@ from discorrecd.module import Module
 
 log = logging.getLogger(__name__)
 
-_IMG_DIR = os.path.join(os.path.dirname(sys.modules['__main__'].__file__), 'custom-emoticons')
+_IMG_DIR = os.path.realpath(os.path.join(os.path.dirname(sys.modules['__main__'].__file__), 'custom-emoticons'))
 _IMG_EXTENSIONS = ['.jpg', '.png', '.gif']
 _EMOTICON_PREFIX = '/'
 
@@ -29,8 +29,11 @@ class CustomEmoticonsModule(Module):
             word, image = self.parse_message(message.content)
             if word and image:
                 new_content = message.content.replace(word, '').strip()
-                await self.client.delete_message(message)
-                await self.client.send_file(message.channel, image, content=new_content)
+                if new_content:
+                    await self.client.edit_message(message, new_content)
+                else:
+                    await self.client.delete_message(message)
+                await self.client.send_file(message.channel, image)
 
     def parse_message(self, message: str) -> Tuple[str, str]:
         """Parse the content of a message and finds the replaceable word-image combination
@@ -53,7 +56,8 @@ class CustomEmoticonsModule(Module):
         :return: The path to the image, None if no image was found
         """
         for ext in _IMG_EXTENSIONS:
-            path = os.path.join(_IMG_DIR, name + ext)
-            if os.path.isfile(path):
+            filename = name + ext
+            path = os.path.join(_IMG_DIR, *filename.split('/'))
+            if os.path.isfile(path) and _IMG_DIR in os.path.realpath(path):
                 return path
         return None
