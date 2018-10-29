@@ -27,7 +27,7 @@ class Discorrecd(object):
 
     def start(self):
         """Start Discorrecd"""
-        self.core.start(username=self.config.username, password=self.config.password)
+        self.core.start(token=self.config.token, username=self.config.username, password=self.config.password)
 
     @staticmethod
     def _setup_logging():
@@ -41,5 +41,6 @@ class Discorrecd(object):
 
 
 class DiscorrecdConfig(Config):
+    token = ConfigProperty('token')  # type: str
     username = ConfigProperty('username')  # type: str
     password = ConfigProperty('password')  # type: str

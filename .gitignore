@@ -91,3 +91,4 @@ ENV/
 /.idea
 /config/apple.json
 /custom-emoticons
+main_test.py
